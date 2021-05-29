@@ -1,0 +1,9 @@
+-- MongoDB
+-- Node
+-- Middleware
+-- REST API
+-- Fetch
+
+-- Serving on Heroku
+-- Compilation
+-- Review and confirmation of all the deliverables being available.
