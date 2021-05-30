@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+      crossorigin="anonymous"
+    />
+    <title>Individual Coursework 2 - Lessons</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="main-header">
+        <ul class="main-header__item-list">
+          <li class="main-header__item">
+            <a class="main-header__item-link active" v-if="showProducts"
+              >Lessons</a
+            >
+            <a
+              class="main-header__item-link"
+              v-else
+              v-on:click="backToProducts()"
+            >
+              <i class="fa fa-arrow-circle-left"></i> Lessons
+            </a>
+          </li>
+        </ul>
+        <button
+          class="main-header__item-button"
+          v-if="cart.length != 0"
+          v-on:click="showCheckout()"
+        >
+          <i class="fa fa-shopping-cart"></i> Cart ({{ itemsInCart }})
+        </button>
+      </header>
+
+      <div id="shopping" v-if="showProducts">
+        <div id="shopping-container">
+          <div class="shopping-items">
+            <div class="item" v-for="(lesson, index) in lessons">
+              <div class="item-content">
+                <div class="item-details">
+                  <span>Subject: {{ lesson.name }}</span><br />
+                  <span>Location: {{ lesson.location }}</span><br />
+                  <span>Price: ${{ lesson.price }}</span><br />
+                  <span>Spaces: {{ lesson.spaces }}</span><br />
+                </div>
+                <img v-bind:src="lesson.image" class="item-image" />
+              </div>
+              <div style="text-align: center">
+                <button
+                  class="item-action"
+                  v-on:click="addToCart(lesson, index)"
+                  v-if="lesson.spaces > 0"
+                >
+                  Add To Cart
+                </button>
+                <button class="item-action disabled" v-else>Add To Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="checkout" v-else>
+        <h2>Your Shopping Cart</h2>
+        <div class="selected-items">
+          <div class="item" v-for="(lesson, idx) in cart">
+            <div class="item-content">
+              <div class="item-details">
+                <span>Subject: {{ lesson.name }}</span><br />
+                <span>Location: {{ lesson.location }}</span><br />
+                <span>Price: ${{ lesson.price }}</span><br />
+                <span>Spaces: {{ lesson.spaces }}</span><br />
+              </div>
+              <img v-bind:src="lesson.image" alt="" class="item-image" />
+            </div>
+            <div style="text-align: center">
+              <button class="item-action" v-on:click="removeFromCart(idx)">
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <form class="checkout-form">
+          <div class="form-control">
+            <label for="name">Name: </label>
+            <input type="text" v-model="details.name" id="name" />
+          </div>
+
+          <div class="form-control">
+            <label for="phone">Phone: </label>
+            <input
+              type="number"
+              minlength="11"
+              v-model="details.phone"
+              id="phone"
+            />
+          </div>
+
+          <button
+            class="checkout-action"
+            type="button"
+            style="margin-top: 0"
+            v-if="details.name && details.phone"
+            v-on:click="checkout()"
+          >
+            Checkout
+          </button>
+          <button
+            class="checkout-action disabled"
+            type="button"
+            v-else
+            style="margin-top: 0"
+            v-on:click="checkout()"
+          >
+            Checkout
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+      const lessons = [
+        {
+          id: 1000,
+          name: "Biology",
+          location: "Brussels",
+          price: 1000,
+          spaces: 5,
+          image: "/images/biology.png",
+        },
+        {
+          id: 1001,
+          name: "Maths",
+          location: "Montenegro",
+          price: 270,
+          spaces: 5,
+          image: "/images/maths.jpg",
+        },
+        {
+          id: 1002,
+          name: "Physics",
+          location: "Paris",
+          price: 1500,
+          spaces: 5,
+          image: "/images/physics.png",
+        },
+        {
+          id: 1003,
+          name: "Chemistry",
+          location: "Cairo",
+          price: 400,
+          spaces: 5,
+          image: "/images/chemistry.jpg",
+        },
+        {
+          id: 1004,
+          name: "Programming",
+          location: "Tokyo",
+          price: 250,
+          spaces: 5,
+          image: "/images/programming.jpg",
+        },
+        {
+          id: 1005,
+          name: "Databases",
+          location: "Nairobi",
+          price: 1400,
+          spaces: 5,
+          image: "/images/databases.png",
+        },
+        {
+          id: 1006,
+          name: "Economics",
+          location: "Stockholm",
+          price: 560,
+          spaces: 5,
+          image: "/images/economics.jpg",
+        },
+        {
+          id: 1007,
+          name: "Advanced Mathematics",
+          location: "Denver",
+          price: 1200,
+          spaces: 5,
+          image: "/images/adv_maths.jpg",
+        },
+        {
+          id: 1008,
+          name: "Data Processing",
+          location: "Rio",
+          price: 410,
+          spaces: 5,
+          image: "/images/data-processing.jpg",
+        },
+        {
+          id: 1009,
+          name: "Anatomy",
+          location: "Carlifonia",
+          price: 700,
+          spaces: 5,
+          image: "/images/anatomy.jpg",
+        },
+      ];
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          lessons: lessons,
+          cart: [],
+          sortBy: "",
+          order: "",
+          showProducts: true,
+          details: {
+            name: "",
+            phone: "",
+          },
+        },
+        methods: {
+          addToCart: function (lesson, idx) {
+            this.cart.push(lesson);
+            this.lessons[idx].spaces--;
+          },
+          backToProducts: function () {
+            this.showProducts = true;
+          },
+          showCheckout: function () {
+            this.showProducts = false;
+          },
+          removeFromCart: function (idx) {
+            this.cart.splice(idx, 1);
+            if (this.cart.length == 0) {
+              this.showProducts = true;
+            }
+          },
+          checkout: function () {
+            alert(
+              `Dear ${this.details.name}, your order for ${this.itemsInCart} items has been submitted and we would be in touch via ${this.details.phone} `
+            );
+            location.reload();
+          },
+        },
+        computed: {
+          itemsInCart: function () {
+            return this.cart.length;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

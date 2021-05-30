@@ -1,0 +1,155 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.main-header {
+    padding: 20px;
+    background: #db920b;
+    display: flex;
+    width: 100%;
+    position: fixed;
+}
+
+.main-header__item-list {
+    padding: 0;
+    margin: 0;
+    margin: auto 0;
+    list-style: none;
+}
+
+.main-header__item {
+    margin: 0 1rem;
+}
+
+.main-header__item-link {
+    color: white;
+    text-decoration: none;
+}
+
+.main-header__item-link:hover {
+    color: rgb(95, 31, 179);
+    cursor: pointer;
+}
+
+.main-header__item-link.active {
+    color: rgb(95, 31, 179);
+}
+
+.main-header__item-button {
+    padding: 7px 25px;
+    background-color: rgb(95, 31, 179);
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    margin-left: auto;
+    margin-right: 40px;
+}
+
+.main-header__item-button:hover {
+    cursor: pointer;
+}
+
+.main-header__item-button:focus {
+    outline: none;
+    border: none;
+}
+
+#shopping {
+    width: 100%;
+    display: flex;
+    padding: 100px 0;
+}
+
+#shopping-container {
+    width: 100%;
+}
+
+.shopping-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.item {
+    padding: 20px 10px;
+    border: 1px solid rgb(95, 31, 179);
+    width: 300px;
+    border-radius: 4px;
+    margin: 0 20px 20px 0;
+}
+
+.item-content {
+    width: 100%;
+    display: flex;
+}
+
+.item-details {
+    width: 50%;
+}
+
+.item-details span {
+    padding-bottom: .2px;
+}
+
+.item-image {
+    display: block;
+    width: 50%;
+    height: 100px;
+}
+
+button.item-action, button.checkout-action {
+    margin-top: 20px;
+    padding: 5px 20px;
+    outline: none;
+    border: none;
+    color: white;
+    background-color: rgb(95, 31, 179);
+    border-radius: 4px;
+}
+
+button.item-action:hover, button.checkout-action:hover {
+    cursor: pointer;
+}
+
+button.item-action.disabled, button.checkout-action.disabled {
+    cursor: not-allowed;
+    background-color: rgba(95, 31, 179, .5);
+}
+
+#checkout {
+    padding: 100px 30px;
+}
+
+.selected-items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.checkout-form {
+
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 30px 0;
+
+}
+
+.checkout-form > * {
+    margin-right: 30px;
+}
+
+.checkout-form .form-control input {
+    border: 1px solid #db920b;
+    border-radius: 4px;
+    height: 1.5rem;
+}
+
+.checkout-form .form-control input:focus {
+    outline: none;
+}
