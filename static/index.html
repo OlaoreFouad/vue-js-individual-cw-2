@@ -110,6 +110,7 @@
             v-if="details.name && details.phone"
             v-on:click="checkout()"
           >
+            <i class="fa fa-spin fa-spinner" v-if="isLoading" ></i>
             Checkout
           </button>
           <button
@@ -139,6 +140,7 @@
             name: "",
             phone: "",
           },
+          isLoading: false,
         },
         methods: {
           addToCart: function (lesson, idx) {
@@ -179,19 +181,37 @@
               }),
             };
 
+            this.isLoading = true;
             fetch("http://localhost:3000/orders", {
               method: "POST",
               body: JSON.stringify(newOrder),
               headers: {
-                "Content-Type": "application/json"
-              }
+                "Content-Type": "application/json",
+              },
             })
-            .then(response => response.json())
-            .then(res => {
-              alert('Order submitted successfully!');
-              location.reload();
-            })
+              .then((response) => response.json())
+              .then((res) => {
+                this.updateLessonSpaces();
+              });
+          },
+          updateLessonSpaces: function () {
+            const lessons = this.cart.map((lesson) => {
+              return { _id: lesson._id, spaces: lesson.spaces };
+            });
 
+            fetch("http://localhost:3000/lessons", {
+              method: "PUT",
+              body: JSON.stringify({ lessons }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((response) => response.json())
+              .then((res) => {
+                this.isLoading = false;
+                alert("Order submitted successfully!");
+                location.reload();
+              });
           },
         },
         computed: {

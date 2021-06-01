@@ -52,18 +52,21 @@ app.put("/lessons", (req, res, next) => {
   const lessons = req.body.lessons;
   let updatedCount = 0;
   lessons.forEach((lesson) => {
+    console.log(lesson);
     req.lessonsCollection
       .findOne({
-        _id: new ObjectID(lesson.id),
+        _id: new ObjectID(lesson._id),
       })
       .then((existingLesson) => {
+        console.log(existingLesson);
         existingLesson.spaces -= lesson.spaces;
         return existingLesson;
       })
       .then((existingLesson) => {
+        console.log('New spaces: ' + existingLesson.spaces);
         return req.lessonsCollection.updateOne(
           {
-            _id: new ObjectID(lesson.id),
+            _id: new ObjectID(lesson._id),
           },
           {
             $set: {
