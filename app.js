@@ -5,6 +5,7 @@ const fs = require("fs");
 
 // mongodb imports
 const MongoClient = require("mongodb").MongoClient;
+const ObjectID = require("mongodb").ObjectID;
 
 const app = express();
 app.use(express.json());
@@ -44,6 +45,48 @@ app.get("/lessons", (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+app.put("/lessons", async (req, res, next) => {
+  const lessons = req.body.lessons;
+  let updatedCount = 0;
+  await lessons.forEach((lesson) => {
+    req.lessonsCollection
+      .findOne({
+        _id: new ObjectID(lesson.id),
+      })
+      .then((existingLesson) => {
+        existingLesson.spaces -= lesson.spaces;
+        return existingLesson;
+      })
+      .then((existingLesson) => {
+        return req.lessonsCollection.updateOne(
+          {
+            _id: new ObjectID(lesson.id),
+          },
+          {
+            $set: {
+              spaces: existingLesson.spaces,
+            },
+          },
+          (err, res) => {
+            if (err) console.error(err);
+          }
+        );
+      })
+      .then((updated) => {
+        updatedCount++;
+        if (updatedCount == lessons.length) {
+          res.send({
+            message: `${ updatedCount } lessons updated successfully!`,
+            status: true,
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
 });
 
 app.get("/orders", (req, res, next) => {
