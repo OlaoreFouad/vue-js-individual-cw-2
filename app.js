@@ -8,6 +8,7 @@ const MongoClient = require("mongodb").MongoClient;
 const ObjectID = require("mongodb").ObjectID;
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -40,17 +41,17 @@ app.get("/lessons", (req, res, next) => {
     .find()
     .toArray()
     .then((lessons) => {
-      res.send(lessons);
+      res.status(200).send(lessons);
     })
     .catch((err) => {
       console.log(err);
     });
 });
 
-app.put("/lessons", async (req, res, next) => {
+app.put("/lessons", (req, res, next) => {
   const lessons = req.body.lessons;
   let updatedCount = 0;
-  await lessons.forEach((lesson) => {
+  lessons.forEach((lesson) => {
     req.lessonsCollection
       .findOne({
         _id: new ObjectID(lesson.id),
@@ -103,6 +104,7 @@ app.get("/orders", (req, res, next) => {
 
 app.post("/orders", (req, res, next) => {
   const newOrder = req.body;
+  console.log(newOrder);
   req.ordersCollection
     .insertOne(newOrder)
     .then((_) => {

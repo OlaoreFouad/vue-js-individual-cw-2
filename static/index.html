@@ -44,7 +44,7 @@
             <div class="item" v-for="(lesson, index) in lessons">
               <div class="item-content">
                 <div class="item-details">
-                  <span>Subject: {{ lesson.name }}</span><br />
+                  <span>Subject: {{ lesson.topic }}</span><br />
                   <span>Location: {{ lesson.location }}</span><br />
                   <span>Price: ${{ lesson.price }}</span><br />
                   <span>Spaces: {{ lesson.spaces }}</span><br />
@@ -72,7 +72,7 @@
           <div class="item" v-for="(lesson, idx) in cart">
             <div class="item-content">
               <div class="item-details">
-                <span>Subject: {{ lesson.name }}</span><br />
+                <span>Subject: {{ lesson.topic }}</span><br />
                 <span>Location: {{ lesson.location }}</span><br />
                 <span>Price: ${{ lesson.price }}</span><br />
                 <span>Spaces: {{ lesson.spaces }}</span><br />
@@ -127,93 +127,10 @@
 
     <script src="https://unpkg.com/vue"></script>
     <script>
-      const lessons = [
-        {
-          id: 1000,
-          name: "Biology",
-          location: "Brussels",
-          price: 1000,
-          spaces: 5,
-          image: "./images/biology.png",
-        },
-        {
-          id: 1001,
-          name: "Maths",
-          location: "Montenegro",
-          price: 270,
-          spaces: 5,
-          image: "./images/maths.jpg",
-        },
-        {
-          id: 1002,
-          name: "Physics",
-          location: "Paris",
-          price: 1500,
-          spaces: 5,
-          image: "./images/physics.png",
-        },
-        {
-          id: 1003,
-          name: "Chemistry",
-          location: "Cairo",
-          price: 400,
-          spaces: 5,
-          image: "./images/chemistry.jpg",
-        },
-        {
-          id: 1004,
-          name: "Programming",
-          location: "Tokyo",
-          price: 250,
-          spaces: 5,
-          image: "./images/programming.jpg",
-        },
-        {
-          id: 1005,
-          name: "Databases",
-          location: "Nairobi",
-          price: 1400,
-          spaces: 5,
-          image: "./images/databases.png",
-        },
-        {
-          id: 1006,
-          name: "Economics",
-          location: "Stockholm",
-          price: 560,
-          spaces: 5,
-          image: "./images/economics.jpg",
-        },
-        {
-          id: 1007,
-          name: "Advanced Mathematics",
-          location: "Denver",
-          price: 1200,
-          spaces: 5,
-          image: "./images/adv_maths.jpg",
-        },
-        {
-          id: 1008,
-          name: "Data Processing",
-          location: "Rio",
-          price: 410,
-          spaces: 5,
-          image: "./images/data-processing.jpg",
-        },
-        {
-          id: 1009,
-          name: "Anatomy",
-          location: "Carlifonia",
-          price: 700,
-          spaces: 5,
-          image: "./images/anatomy.jpg",
-        },
-      ];
-
       var app = new Vue({
         el: "#app",
         data: {
-          lessons: lessons,
+          lessons: [],
           cart: [],
           sortBy: "",
           order: "",
@@ -229,14 +146,9 @@
             if (lessonIdx >= 0) {
               this.cart[lessonIdx].spaces++;
             } else {
-              this.cart.push({
-                id: lesson.id,
-                name: lesson.name,
-                location: lesson.location,
-                price: lesson.price,
-                spaces: 1,
-                image: lesson.image,
-              });
+              let newLesson = { ...lesson };
+              newLesson.spaces = 1;
+              this.cart.push(newLesson);
             }
 
             this.lessons[idx].spaces--;
@@ -254,19 +166,53 @@
             }
           },
           checkout: function () {
-            alert(
-              `Dear ${this.details.name}, your order for ${this.itemsInCart} spaces has been submitted and we would be in touch via ${this.details.phone} `
-            );
-            location.reload();
+            const newOrder = {
+              name: this.details.name,
+              phone: this.details.phone,
+              lessons: this.cart.map((item) => {
+                return {
+                  _id: item._id,
+                  lessonId: item.id,
+                  spaces: item.spaces,
+                  topic: item.topic,
+                };
+              }),
+            };
+
+            fetch("http://localhost:3000/orders", {
+              method: "POST",
+              body: JSON.stringify(newOrder),
+              headers: {
+                "Content-Type": "application/json"
+              }
+            })
+            .then(response => response.json())
+            .then(res => {
+              alert('Order submitted successfully!');
+              location.reload();
+            })
+
           },
         },
         computed: {
           itemsInCart: function () {
-            const totalSpaces = this.cart.map(item => item.spaces).reduce((prev, acc) => {
-              return prev + acc;
-            })
+            const totalSpaces = this.cart
+              .map((item) => item.spaces)
+              .reduce((prev, acc) => {
+                return prev + acc;
+              });
             return totalSpaces;
           },
+        },
+        created: () => {
+          fetch("http://localhost:3000/lessons")
+            .then((response) => {
+              return response.json();
+            })
+            .then((_lessons) => {
+              app.lessons = _lessons;
+              console.log(app);
+            });
         },
       });
     </script>
