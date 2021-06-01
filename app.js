@@ -7,12 +7,12 @@ const fs = require("fs");
 const MongoClient = require("mongodb").MongoClient;
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.use((req, res, next) => {
-    res.setHeader('Allow-Access-Control-Origin', '*');
-    next();
-})
+  res.setHeader("Allow-Access-Control-Origin", "*");
+  next();
+});
 
 app.use((req, res, next) => {
   MongoClient.connect(
@@ -43,6 +43,37 @@ app.get("/lessons", (req, res, next) => {
     })
     .catch((err) => {
       console.log(err);
+    });
+});
+
+app.get("/orders", (req, res, next) => {
+  req.ordersCollection
+    .find()
+    .toArray()
+    .then((orders) => {
+      res.send(orders);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+app.post("/orders", (req, res, next) => {
+  const newOrder = req.body;
+  req.ordersCollection
+    .insertOne(newOrder)
+    .then((_) => {
+      res.status(200).send({
+        status: true,
+        message: "Order submitted successfully!",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(404).send({
+        status: false,
+        message: "Unable to submit order",
+      });
     });
 });
 
