@@ -182,7 +182,7 @@
             };
 
             this.isLoading = true;
-            fetch("http://localhost:3000/orders", {
+            fetch("https://online-cw2.herokuapp.com/orders", {
               method: "POST",
               body: JSON.stringify(newOrder),
               headers: {
@@ -199,7 +199,7 @@
               return { _id: lesson._id, spaces: lesson.spaces };
             });
 
-            fetch("http://localhost:3000/lessons", {
+            fetch("https://online-cw2.herokuapp.com/lessons", {
               method: "PUT",
               body: JSON.stringify({ lessons }),
               headers: {
@@ -225,7 +225,7 @@
           },
         },
         created: () => {
-          fetch("http://localhost:3000/lessons")
+          fetch("https://online-cw2.herokuapp.com/lessons")
             .then((response) => {
               return response.json();
             })

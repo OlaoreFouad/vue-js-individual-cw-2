@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "490e9869-8bbf-4ff2-a16a-2c64dfd64852",
+		"name": "VueJS CW 2 Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Lessons",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://online-cw2.herokuapp.com/lessons",
+					"protocol": "https",
+					"host": [
+						"online-cw2",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"lessons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://online-cw2.herokuapp.com/orders",
+					"protocol": "https",
+					"host": [
+						"online-cw2",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Orders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Nofiu Olaore Akinrinola\",\r\n    \"phone\": \"09010101010\",\r\n    \"lessons\": [\r\n        {\r\n            \"_id\": \"a very loooonggggg id\",\r\n            \"lessonId\": 100101,\r\n            \"spaces\": 1,\r\n            \"topic\": \"Biology\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://online-cw2.herokuapp.com/orders",
+					"protocol": "https",
+					"host": [
+						"online-cw2",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Lesson Spaces",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"lessons\": [\r\n        {\r\n            \"_id\": \"60b2e5b162ff647f1c4a484b\",\r\n            \"spaces\": 2\r\n        },\r\n        {\r\n            \"_id\": \"60b2e5b162ff647f1c4a484c\",\r\n            \"spaces\": 1\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://online-cw2.herokuapp.com/lessons",
+					"protocol": "https",
+					"host": [
+						"online-cw2",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"lessons"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
