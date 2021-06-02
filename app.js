@@ -143,6 +143,8 @@ app.use((req, res, next) => {
   res.status(404).send("File Not Found!");
 });
 
-app.listen(3000, (_) => {
+const port = process.env.PORT || 3000;
+
+app.listen(port, (_) => {
   console.log("Server started!");
 });
