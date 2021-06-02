@@ -1,0 +1,3 @@
+GitHub Repository of Backend Code: https://github.com/OlaoreFouad/vue-js-individual-cw-2
+GitHub Page that runs FrontEnd Code: https://olaorefouad.github.io/vue-js-individual-cw-2/static/
+Heroku Route that returns Lesson Information: https://online-cw2.herokuapp.com/lessons
