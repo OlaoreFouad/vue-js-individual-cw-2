@@ -14,11 +14,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use((req, res, next) => {
-  // res.setHeader("Access-Control-Allow-Origin", "*");
-  next();
-});
-
-app.use((req, res, next) => {
   MongoClient.connect(
     "mongodb+srv://fouad:foodiepassword@cluster0.ev0uv.mongodb.net/eSchool"
   )

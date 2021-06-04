@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "60b9a13e1f240f0015e62c2c"
+  },
+  "name": "Fouad Olaore",
+  "phone": "09010101212",
+  "lessons": [
+    {
+      "_id": "60b2e5b162ff647f1c4a4844",
+      "lessonId": 1000,
+      "spaces": 1,
+      "topic": "Biology"
+    },
+    {
+      "_id": "60b2e5b162ff647f1c4a4846",
+      "lessonId": 1002,
+      "spaces": 1,
+      "topic": "Physics"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "60b9a1701f240f0015e62c2d"
+  },
+  "name": "Durotimi",
+  "phone": "01012122233",
+  "lessons": [
+    {
+      "_id": "60b2e5b162ff647f1c4a484a",
+      "lessonId": 1006,
+      "spaces": 1,
+      "topic": "Economics"
+    },
+    {
+      "_id": "60b2e5b162ff647f1c4a484b",
+      "lessonId": 1007,
+      "spaces": 1,
+      "topic": "Advanced Mathematics"
+    }
+  ]
+}]

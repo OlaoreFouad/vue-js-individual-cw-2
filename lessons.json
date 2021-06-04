@@ -1,0 +1,101 @@
+[{
+  "_id": {
+    "$oid": "60b2e5b162ff647f1c4a4844"
+  },
+  "id": 1000,
+  "location": "Brussels",
+  "price": 1000,
+  "spaces": 5,
+  "image": "./images/biology.png",
+  "topic": "Biology"
+},{
+  "_id": {
+    "$oid": "60b2e5b162ff647f1c4a4845"
+  },
+  "id": 1001,
+  "location": "Montenegro",
+  "price": 270,
+  "spaces": 5,
+  "image": "./images/maths.jpg",
+  "topic": "Maths"
+},{
+  "_id": {
+    "$oid": "60b2e5b162ff647f1c4a4846"
+  },
+  "id": 1002,
+  "location": "Paris",
+  "price": 1500,
+  "spaces": 5,
+  "image": "./images/physics.png",
+  "topic": "Physics"
+},{
+  "_id": {
+    "$oid": "60b2e5b162ff647f1c4a4847"
+  },
+  "id": 1003,
+  "location": "Cairo",
+  "price": 400,
+  "spaces": 5,
+  "image": "./images/chemistry.jpg",
+  "topic": "Chemistry"
+},{
+  "_id": {
+    "$oid": "60b2e5b162ff647f1c4a4848"
+  },
+  "id": 1004,
+  "location": "Tokyo",
+  "price": 250,
+  "spaces": 5,
+  "image": "./images/programming.jpg",
+  "topic": "Programming"
+},{
+  "_id": {
+    "$oid": "60b2e5b162ff647f1c4a4849"
+  },
+  "id": 1005,
+  "location": "Nairobi",
+  "price": 1400,
+  "spaces": 5,
+  "image": "./images/databases.png",
+  "topic": "Databases"
+},{
+  "_id": {
+    "$oid": "60b2e5b162ff647f1c4a484a"
+  },
+  "id": 1006,
+  "location": "Stockholm",
+  "price": 560,
+  "spaces": 5,
+  "image": "./images/economics.jpg",
+  "topic": "Economics"
+},{
+  "_id": {
+    "$oid": "60b2e5b162ff647f1c4a484b"
+  },
+  "id": 1007,
+  "location": "Denver",
+  "price": 1200,
+  "spaces": 5,
+  "image": "./images/adv_maths.jpg",
+  "topic": "Advanced Mathematics"
+},{
+  "_id": {
+    "$oid": "60b2e5b162ff647f1c4a484c"
+  },
+  "id": 1008,
+  "location": "Rio",
+  "price": 410,
+  "spaces": 5,
+  "image": "./images/data-processing.jpg",
+  "topic": "Data Processing"
+},{
+  "_id": {
+    "$oid": "60b2e5b162ff647f1c4a484d"
+  },
+  "id": 1009,
+  "location": "Carlifonia",
+  "price": 700,
+  "spaces": 5,
+  "image": "./images/anatomy.jpg",
+  "topic": "Anatomy"
+}]
